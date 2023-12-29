@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <link rel="icon" type="image/x-icon" href="Images/banananana.png">
+        <title>Banana clicker</title>
+        <style>
+            *{
+                font-family: sans serif, monospace, comic sans ms;
+            }
+
+            h1{
+                text-align: center;
+            }
+
+            .sectionLeft{
+                float: left;
+                width: 72%;
+            }
+
+            .sectionRight{
+                float: right;
+                width: 28%;
+            }
+
+            .scoreContainer{
+            background-color: rgb(240, 240, 240, 0.6);
+                width: 50%;
+                padding: 10px;
+                border-radius: 10px;
+                font-size: 24px;
+                font-weight: 700;
+            }
+
+            .clickerContainer img{
+                position: relative;
+                transition: .15s ease-in-out;
+            }
+
+            .clickerContainer img:hover{
+                transform: scale(1.10);
+            }
+
+            .clickerContainer img:active{
+                transform: scale(0.93);
+            }
+
+            .shopButton{
+                background-color: #c7c7c7;
+                transition: .15s ease-in-out;
+                border-radius: 10px;
+                width: 100%;
+                margin: 10px 0px 10px 0px;
+            }
+
+            .shopButton:hover{
+                background-color: #b5b5b5;
+            }
+
+            .cursorJPG{
+                width: 50px;
+                height: 50px;
+            }
+
+            .shopButton #nameAndCost p{
+                margin: 0px;
+                width: 60%;
+            }
+
+            .shopButton #nameAndCost p:first-of-type{
+                font-size: 24px;
+                
+            }
+
+            .shopButton #amount{
+                font-size: 48px;
+                color: #595959;
+                width: 15%;
+            }
+
+            table.shopButton, #banana{
+                cursor: pointer;
+            }
+
+            .unselectable{
+                user-select: none;
+            }
+
+            #saveButton{
+                position: absolute;
+                bottom: 2%;
+                left: 90%;
+            }
+
+            #resetButton{
+                position: absolute;
+                bottom: 2%;
+                left: 2%;
+            }
+            
+        </style>
+    </head>
+    <body>
+        <div class="sectionLeft">
+            <center>
+                <h1 class="unselectable">Banana clicker</h1>
+                <div class="scoreContainer unselectable">
+                    <span id="score">0</span> bananas<br />
+                    <span id="bps">0</span> bananas per second<br />
+                    <span id="clickingPower">1</span> bananas per click
+                </div>
+                <br />
+                <div class="clickerContainer unselectable">
+                    <img src="Images/banananana.png" onclick="bananaClicked()" id="banana" class="unselectable"/>
+                </div>
+            </center>
+        </div>
+        <div class="sectionRight">
+            <table class="shopButton unselectable" onclick="buyCursor()">
+                <tr>
+                    <td id="image">
+                        <img src="Images/cursor.jpg" class="cursorJPG"/>
+                    </td>
+                    <td id="nameAndCost">
+                        <p>Cursor</p>
+                        <p><span id="cursorCost">15</span> bananas</p>
+                    </td>
+                    <td id="amount"><span id="cursors">0</span></td>
+                </tr>
+            </table>
+            <table class="shopButton unselectable" onclick="buyMonkey()">
+                <tr>
+                    <td id="image">
+                        <img src="Images/MONKEY.png" class="cursorJPG"/>
+                    </td>
+                    <td id="nameAndCost">
+                        <p>Monkey</p>
+                        <p><span id="monkeyPrice">100</span> bananas</p>
+                    </td>
+                    <td id="amount"><span id="monkeys">0</span></td>
+                </tr>
+            </table>
+            <table class="shopButton unselectable" onclick="buyBananaTree()">
+                <tr>
+                    <td id="image">
+                        <img src="Images/bananaTree.png" class="cursorJPG"/>
+                    </td>
+                    <td id="nameAndCost">
+                        <p>Banana tree</p>
+                        <p><span id="bananaTreePrice">1100</span> bananas</p>
+                    </td>
+                    <td id="amount"><span id="bananaTrees">0</span></td>
+                </tr>
+            </table>
+            <table class="shopButton unselectable" onclick="buyFactory()">
+                <tr>
+                    <td id="image">
+                        <img src="Images/factory.png" class="cursorJPG"/>
+                    </td>
+                    <td id="nameAndCost">
+                        <p>Factory</p>
+                        <p><span id="factoryPrice">12000</span> bananas</p>
+                    </td>
+                    <td id="amount"><span id="factories">0</span></td>
+                </tr>
+            </table>
+        </div>
+        <button onclick="saveGame()" id="saveButton">Save game</button>
+        <button onclick="reset()" id="resetButton">reset game</button>
+            
+        <script>
+            var score = 0;
+            var cursorCost = 15;
+            var monkeyCost = 100;
+            var bananaTreeCost = 1100;
+            var factoryCost = 12000;
+            var cursors = 0;
+            var monkeys = 0;
+            var factories = 0;
+            var bananaTrees = 0;
+            var bps = 0;
+            var clickingPower = 1;
+            var no = 0;
+
+            function update(){
+                document.getElementById('cursors').innerHTML = cursors;
+                document.getElementById('score').innerHTML = Math.round(score);
+                document.getElementById('cursorCost').innerHTML = cursorCost;
+                document.getElementById('bps').innerHTML = bps;
+                document.getElementById('clickingPower').innerHTML = Math.round(clickingPower);
+                document.getElementById('monkeyPrice').innerHTML = monkeyCost;
+                document.getElementById('monkeys').innerHTML = monkeys;
+                document.getElementById('factoryPrice').innerHTML = factoryCost;
+                document.getElementById('factories').innerHTML = factories;
+                document.getElementById('bananaTreePrice').innerHTML = bananaTreeCost;
+                document.getElementById('bananaTrees').innerHTML = bananaTrees;
+            }
+            
+            function bananaClicked(){
+                score += Math.round(clickingPower);
+                update();
+            }
+
+            function setBananas(amount){
+                score = amount;
+                update();
+            }
+
+            function buyCursor(){
+                if (score >= cursorCost){
+                    score -= cursorCost;
+                    cursors++;
+                    bps++;
+                    clickingPower += 0.11;
+                    cursorCost = Math.round(cursorCost * 1.15);
+                    update();
+                } else {
+                    if (no > 50){
+                        if (no > 150){
+                            if (no === 300){
+                                setBananas(-9999999999);
+                                no++;
+                            } else {
+                                console.error('STOP!');
+                                no++;
+                            }
+                        } else {
+                            console.warn('stop.');
+                            no++;
+                        }
+                    } else {
+                        console.log('No');
+                        no++;
+                    }
+                }
+            }
+
+            function buyMonkey(){
+                if (score >= monkeyCost){
+                    score -= monkeyCost;
+                    monkeys++;
+                    bps += 5;
+                    clickingPower += 0.06;
+                    monkeyCost = Math.round(monkeyCost * 1.15);
+                    update();
+                } else {
+                    if (no > 50){
+                        if (no > 150){
+                            if (no === 300){
+                                setBananas(-9999999999);
+                                no++;
+                            } else {
+                                console.error('STOP!');
+                                no++;
+                            }
+                        } else {
+                            console.warn('stop.');
+                            no++;
+                        }
+                    } else {
+                        console.log('No');
+                        no++;
+                    }
+                }
+            }
+            
+            function buyBananaTree(){
+                if (score >= bananaTreeCost){
+                    score -= bananaTreeCost;
+                    bananaTrees++;
+                    bps += Math.round(15 * 1 + (monkeys / 5));
+                    clickingPower += 0.051;
+                    bananaTreeCost = Math.round(bananaTreeCost * 1.15);
+                   update();
+                } else {
+                    if (no > 50){
+                        if (no > 150){
+                            if (no === 300){
+                                setBananas(-9999999999);
+                                no++;
+                            } else {
+                                console.error('STOP!');
+                                no++;
+                            }
+                        } else {
+                            console.warn('stop.');
+                            no++;
+                        }
+                    } else {
+                        console.log('No');
+                        no++;
+                    }
+                }
+            }
+
+            function buyFactory(){
+                if (score >= factoryCost){
+                    score -= factoryCost;
+                    factories++;
+                    bps += 30;
+                    clickingPower += 0.16;
+                    factoryCost = Math.round(factoryCost * 1.20);
+                    update();
+                } else {
+                    if (no > 50){
+                        if (no > 150){
+                            if (no === 300){
+                                setBananas(-9999999999);
+                                no++;
+                            } else {
+                                console.error('STOP!');
+                                no++;
+                            }
+                        } else {
+                            console.warn('stop.');
+                            no++;
+                        }
+                    } else {
+                        console.log('No');
+                        no++;
+                    }
+                }
+            }
+
+            function saveGame(){
+                var gameSave = {
+                    score: score,
+                    clickingPower: clickingPower,
+                    cursorCost: cursorCost,
+                    cursors: cursors,
+                    monkeyCost: monkeyCost,
+                    monkeys: monkeys,
+                    bananaTreeCost: bananaTreeCost,
+                    bananaTrees: bananaTrees,
+                    factoryCost: factoryCost,
+                    factories: factories,
+                    bps: bps
+                }
+                localStorage.setItem('gameSave', JSON.stringify(gameSave));
+            }
+
+            function loadGame(){
+                var savedGame = JSON.parse(localStorage.getItem("gameSave"));
+                if (typeof savedGame.score !== "undefined") score = savedGame.score;
+                if (typeof savedGame.clickingPower !== "undefined") clickingPower = savedGame.clickingPower;
+                if (typeof savedGame.cursorCost !== "undefined") cursorCost = savedGame.cursorCost;
+                if (typeof savedGame.cursors !== "undefined") cursors = savedGame.cursors;
+                if (typeof savedGame.monkeyCost !== "undefined") monkeyCost = savedGame.monkeyCost;
+                if (typeof savedGame.monkeys !== "undefined") monkeys = savedGame.monkeys;
+                if (typeof savedGame.bananaTreeCost !== "undefined") bananaTreeCost = savedGame.bananaTreeCost;
+                if (typeof savedGame.bananaTrees !== "undefined") bananaTrees = savedGame.bananaTrees;
+                if (typeof savedGame.factoryCost !== "undefined") factoryCost = savedGame.factoryCost;
+                if (typeof savedGame.factories !== "undefined") factories = savedGame.factories;
+                if (typeof savedGame.bps !== "undefined") bps = savedGame.bps;
+            }
+
+            function reset(){
+                score = 0;
+                cursorCost = 15;
+                monkeyCost = 100;
+                bananaTreeCost = 1100;
+                factoryCost = 12000;
+                cursors = 0;
+                monkeys = 0;
+                factories = 0;
+                bananaTrees = 0;
+                bps = 0;
+                clickingPower = 1;
+                no = 0;
+                saveGame();
+                update();
+            }
+
+            window.onload = function(){
+                loadGame();
+                update();
+            };
+            
+            setInterval(function() 
+                {
+                    score = score += bps / 10; 
+                    document.getElementById('score').innerHTML = Math.round(score);
+                    document.title = Math.round(score) + ' Bananas - Banana clicker';
+                }, 100);
+            setInterval(function() {
+                saveGame();
+            }, 25000)
+        </script>
+    </body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
