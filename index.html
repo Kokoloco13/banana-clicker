@@ -357,20 +357,21 @@
             }
 
             function reset(){
-                score = 0;
-                cursorCost = 15;
-                monkeyCost = 100;
-                bananaTreeCost = 1100;
-                factoryCost = 12000;
-                cursors = 0;
-                monkeys = 0;
-                factories = 0;
-                bananaTrees = 0;
-                bps = 0;
-                clickingPower = 1;
-                no = 0;
-                saveGame();
-                update();
+                    if (confirm("Are you shure you want to reset? This can not be undone.") == true){
+                    score = 0;
+                    cursorCost = 15;
+                    monkeyCost = 100;
+                    bananaTreeCost = 1100;
+                    factoryCost = 12000;
+                    cursors = 0;
+                    monkeys = 0;
+                    factories = 0;
+                    bananaTrees = 0;
+                    bps = 0;
+                    clickingPower = 1;
+                    no = 0;
+                    update();
+                }
             }
 
             window.onload = function(){
