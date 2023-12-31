@@ -167,6 +167,18 @@
                     <td id="amount"><span id="factories">0</span></td>
                 </tr>
             </table>
+            <table class="shopButton unselectable" onclick="buyBank()">
+                <tr>
+                    <td id="image">
+                        <img src="images/bank.png" class="cursorJPG"/>
+                    </td>
+                    <td id="nameAndCost">
+                        <p>Bank</p>
+                        <p><span id="bankPrice">130000</span> bananas</p>
+                    </td>
+                    <td id="amount"><span id="banks">0</span></td>
+                </tr>
+            </table>
         </div>
         <button onclick="saveGame()" id="saveButton">Save game</button>
         <button onclick="reset()" id="resetButton">reset game</button>
@@ -177,26 +189,30 @@
             var monkeyCost = 100;
             var bananaTreeCost = 1100;
             var factoryCost = 12000;
+            var bankCost = 130000;
             var cursors = 0;
             var monkeys = 0;
             var factories = 0;
             var bananaTrees = 0;
+            var banks = 0;
             var bps = 0;
             var clickingPower = 1;
             var no = 0;
 
             function update(){
                 document.getElementById('cursors').innerHTML = cursors;
-                document.getElementById('score').innerHTML = Math.round(score);
-                document.getElementById('cursorCost').innerHTML = cursorCost;
-                document.getElementById('bps').innerHTML = bps;
+                document.getElementById('score').innerHTML = shorten(score);
+                document.getElementById('cursorCost').innerHTML = shorten(cursorCost);
+                document.getElementById('bps').innerHTML = shorten(bps);
                 document.getElementById('clickingPower').innerHTML = Math.round(clickingPower);
-                document.getElementById('monkeyPrice').innerHTML = monkeyCost;
+                document.getElementById('monkeyPrice').innerHTML = shorten(monkeyCost);
                 document.getElementById('monkeys').innerHTML = monkeys;
-                document.getElementById('factoryPrice').innerHTML = factoryCost;
+                document.getElementById('factoryPrice').innerHTML = shorten(factoryCost);
                 document.getElementById('factories').innerHTML = factories;
-                document.getElementById('bananaTreePrice').innerHTML = bananaTreeCost;
+                document.getElementById('bananaTreePrice').innerHTML = shorten(bananaTreeCost);
                 document.getElementById('bananaTrees').innerHTML = bananaTrees;
+                document.getElementById('bankPrice').innerHTML = shorten(bankCost);
+                document.getElementById('banks').innerHTML = banks;
             }
             
             function bananaClicked(){
@@ -300,9 +316,38 @@
                 if (score >= factoryCost){
                     score -= factoryCost;
                     factories++;
-                    bps += 30;
+                    bps += 45;
                     clickingPower += 0.16;
                     factoryCost = Math.round(factoryCost * 1.20);
+                    update();
+                } else {
+                    if (no > 50){
+                        if (no > 150){
+                            if (no === 300){
+                                setBananas(-9999999999);
+                                no++;
+                            } else {
+                                console.error('STOP!');
+                                no++;
+                            }
+                        } else {
+                            console.warn('stop.');
+                            no++;
+                        }
+                    } else {
+                        console.log('No');
+                        no++;
+                    }
+                }
+            }
+            
+            function buyBank(){
+                if (score >= bankCost){
+                    score -= bankCost;
+                    banks++;
+                    bps += 250;
+                    clickingPower += 0.2;
+                    bankCost = Math.round(bankCost * 1.20);
                     update();
                 } else {
                     if (no > 50){
@@ -337,6 +382,8 @@
                     bananaTrees: bananaTrees,
                     factoryCost: factoryCost,
                     factories: factories,
+                    bankCost: bankCost,
+                    banks: banks,
                     bps: bps
                 }
                 localStorage.setItem('gameSave', JSON.stringify(gameSave));
@@ -354,6 +401,8 @@
                 if (typeof savedGame.bananaTrees !== "undefined") bananaTrees = savedGame.bananaTrees;
                 if (typeof savedGame.factoryCost !== "undefined") factoryCost = savedGame.factoryCost;
                 if (typeof savedGame.factories !== "undefined") factories = savedGame.factories;
+                if (typeof savedGame.bankCost !== "undefined") bankCost = savedGame.bankCost;
+                if (typeof savedGame.banks !== "undefined") banks = savedGame.banks;
                 if (typeof savedGame.bps !== "undefined") bps = savedGame.bps;
             }
 
@@ -364,16 +413,95 @@
                     monkeyCost = 100;
                     bananaTreeCost = 1100;
                     factoryCost = 12000;
+                    bankCost = 130000;
                     cursors = 0;
                     monkeys = 0;
                     factories = 0;
                     bananaTrees = 0;
+                    banks = 0;
                     bps = 0;
                     clickingPower = 1;
                     no = 0;
                     update();
                 }
             }
+
+            var count = 20000000000000000000005000000000000000000000000000000000000000000000000000000000;
+
+function shorten(num) {
+    var count = Math.round(num);
+    var str = count.toString();
+    var tmpCount = '';
+    if (count < 1000000) {
+        tmpCount = "";
+    } else if (count > 1000000 && count < 1000000000) {
+        str = "Million";
+        tmpCount = (count / 1000000).toFixed(2);
+    } else if (count > 1000000000 && count < 1000000000000) {
+        str = "Billion";
+        tmpCount = (count / 1000000000).toFixed(2);
+    } else if (count > 1000000000000 && count < 1000000000000000) {
+        str = "Trillion";
+        tmpCount = (count / 1000000000000).toFixed(2);
+    } else if (count > 1000000000000000 && count < 1000000000000000000) {
+        str = "Quadrillion";
+        tmpCount = (count / 1000000000000000).toFixed(2);
+    } else if (count > 1000000000000000000 && count < 1000000000000000000000) {
+        str = "Quintillion";
+        tmpCount = (count / 1000000000000000000).toFixed(2);
+    } else if (count > 1000000000000000000000 && count < 1000000000000000000000000) {
+        str = "Sextillion";
+        tmpCount = (count / 1000000000000000000000).toFixed(2);
+    } else if (count > 1000000000000000000000000 && count < 1000000000000000000000000000) {
+        str = "Septillion";
+        tmpCount = (count / 1000000000000000000000000).toFixed(2);
+    } else if (count > 1000000000000000000000000000 && count < 1000000000000000000000000000000) {
+        str = "Octillion";
+        tmpCount = (count / 1000000000000000000000000000).toFixed(2);
+    } else if (count > 1000000000000000000000000000000 && count < 1000000000000000000000000000000000) {
+        str = "Nonillion";
+        tmpCount = (count / 1000000000000000000000000000000).toFixed(2);
+    } else if (count > 1000000000000000000000000000000000 && count < 1000000000000000000000000000000000000) {
+        str = "Decillion";
+        tmpCount = (count / 1000000000000000000000000000000000).toFixed(2);
+    } else if (count > 1000000000000000000000000000000000000 && count < 1000000000000000000000000000000000000000) {
+        str = "Undecillion";
+        tmpCount = (count / 1000000000000000000000000000000000000).toFixed(2);
+    } else if (count > 1000000000000000000000000000000000000000 && count < 1000000000000000000000000000000000000000000) {
+        str = "Duodecillion";
+        tmpCount = (count / 1000000000000000000000000000000000000000).toFixed(2);
+    } else if (count > 1000000000000000000000000000000000000000000 && count < 1000000000000000000000000000000000000000000000) {
+        str = "Tredecillion";
+        tmpCount = (count / 1000000000000000000000000000000000000000000).toFixed(2);
+    } else if (count > 1000000000000000000000000000000000000000000000 && count < 1000000000000000000000000000000000000000000000000) {
+        str = "Quattuordecillion";
+        tmpCount = (count / 1000000000000000000000000000000000000000000000).toFixed(2);
+    } else if (count > 1000000000000000000000000000000000000000000000000 && count < 1000000000000000000000000000000000000000000000000000) {
+        str = "Quindecillion";
+        tmpCount = (count / 1000000000000000000000000000000000000000000000000).toFixed(2);
+    } else if (count > 1000000000000000000000000000000000000000000000000000 && count < 1000000000000000000000000000000000000000000000000000000) {
+        str = "Sexdecillion";
+        tmpCount = (count / 1000000000000000000000000000000000000000000000000000).toFixed(2);
+    } else if (count > 1000000000000000000000000000000000000000000000000000000 && count < 1000000000000000000000000000000000000000000000000000000000) {
+        str = "Septendecillion";
+        tmpCount = (count / 1000000000000000000000000000000000000000000000000000000).toFixed(2);
+    } else if (count > 1000000000000000000000000000000000000000000000000000000000 && count < 1000000000000000000000000000000000000000000000000000000000000) {
+        str = "Octodecillion";
+        tmpCount = (count / 1000000000000000000000000000000000000000000000000000000000).toFixed(2);
+    } else if (count > 1000000000000000000000000000000000000000000000000000000000000 && count < 1000000000000000000000000000000000000000000000000000000000000000) {
+        str = "Novemdecillion";
+        tmpCount = (count / 1000000000000000000000000000000000000000000000000000000000000).toFixed(2);
+    } else if (count > 1000000000000000000000000000000000000000000000000000000000000000 && count < 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000) {
+        str = "Vigintillion";
+        tmpCount = (count / 1000000000000000000000000000000000000000000000000000000000000000).toFixed(2);
+    } else if (count > 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 && count) {
+        str = "Googol";
+        tmpCount = (count / 10000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000).toFixed(2);
+    }
+
+
+    return tmpCount + ' ' + str;
+}
 
             window.onload = function(){
                 loadGame();
@@ -383,8 +511,8 @@
             setInterval(function() 
                 {
                     score = score += bps / 10; 
-                    document.getElementById('score').innerHTML = Math.round(score);
-                    document.title = Math.round(score) + ' Bananas - Banana clicker';
+                    update();
+                    document.title = shorten(score) + ' Bananas - Banana clicker';
                 }, 100);
             setInterval(function() {
                 saveGame();
@@ -392,18 +520,3 @@
         </script>
     </body>
 </html>
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
