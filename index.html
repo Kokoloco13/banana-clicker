@@ -48,7 +48,7 @@
             }
 
             .shopButton{
-                background-color: #A020F0; //c7c7c7
+                background-color: #c7c7c7;
                 transition: .15s ease-in-out;
                 border-radius: 10px;
                 width: 100%;
@@ -100,6 +100,11 @@
                 bottom: 2%;
                 left: 2%;
             }
+
+            #secret{
+                position: absolute;
+                bottom: 2%;
+                left: 20%;
             
         </style>
     </head>
@@ -182,7 +187,7 @@
         </div>
         <button onclick="saveGame()" id="saveButton">Save game</button>
         <button onclick="reset()" id="resetButton">reset game</button>
-        <button onclick="setBananas(score + 1000)" id="resetButton">secret...</button>
+        <button onclick="setBananas(score + 1000)" id="secret">secret...</button>
             
         <script>
             var score = 0;
