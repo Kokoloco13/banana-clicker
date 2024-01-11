@@ -44,7 +44,7 @@
             }
 
             .clickerContainer img:active{
-                transform: scale(0.95);
+                transform: scale(0.93);
             }
 
             .shopButton{
@@ -101,17 +101,34 @@
                 left: 2%;
             }
 
-            #secret{
-                position: absolute;
-                bottom: 2%;
-                left: 20%;
+            h1{
+                margin: 0;
+            }
             
+            .newsTicker{
+                background-color: blue;
+                color: white;
+                font-weight: 600;
+                width: 80%;
+                border-radius: 5px;
+                vertical-align: middle;
+                margin-top: 2%;
+                margin-bottom: 2%;
+            }
+
         </style>
     </head>
     <body>
+        
         <div class="sectionLeft">
             <center>
-                <h1 class="unselectable">Banana clicker<!-- - hi aiden!--></h1>
+                <h1 class="unselectable">Banana clicker</h1>
+
+                <div class="newsTicker unselectable" onclick="nextNews()">
+                    <div class="tickerText">
+                        News: <span id="newsText"></span>
+                    </div>
+                </div>
                 <div class="scoreContainer unselectable">
                     <span id="score">0</span> bananas<br />
                     <span id="bps">0</span> bananas per second<br />
@@ -203,6 +220,7 @@
             var bps = 0;
             var clickingPower = 1;
             var no = 0;
+            var currentNews = "Someone Opened Banana Clicker!";
 
             function update(){
                 document.getElementById('cursors').innerHTML = cursors;
@@ -218,6 +236,7 @@
                 document.getElementById('bananaTrees').innerHTML = bananaTrees;
                 document.getElementById('bankPrice').innerHTML = shorten(bankCost);
                 document.getElementById('banks').innerHTML = banks;
+                document.getElementById('newsText').innerHTML = currentNews;
             }
             
             function bananaClicked(){
@@ -507,11 +526,8 @@ function shorten(num) {
 
     return tmpCount + ' ' + str;
 }
-
-            window.onload = function(){
-                loadGame();
-                update();
-            };
+            let newsItems = ["Bananas Are Very Epic!", "Stay Away From Imposter bananas!", "Banana Gets lost in a cave! Rescue workers are attempting to save him.", "Someone said \"MaxMax\" and went missing!", "Person plays bananas clicker for more than 40 seconds!", "If you see a banana with brown or black spots, RUN!", "Person says \"KOKO!\" and gets eaten! Remember: never say Koko or MaxMax.", "Thanks for playing banana clicker! -Koko (The creator)", "Person becomes epic by playing banana clicker!", "There is a very evil person running around taking banana's skin and peeling it off! And he eats bananas!", "I wouldnt mind SOMEONE ELSE telling ME the news!", "If you want a shoutout in the news, just ask me!", "Local person is making a lot of bananas!"];
+            let newsID = 0;
             
             setInterval(function() 
                 {
@@ -521,7 +537,23 @@ function shorten(num) {
                 }, 100);
             setInterval(function() {
                 saveGame();
-            }, 25000)
+            }, 20000)
+
+            function nextNews(){
+                newsID = newsID % newsItems.length;
+                currentNews = newsItems[newsID];
+                update();
+                newsID++;
+            }
+
+            setInterval(function(){
+                nextNews();
+            }, 6000)
+
+            window.onload = function(){
+                loadGame();
+                update();
+            };
         </script>
     </body>
 </html>
