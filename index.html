@@ -120,6 +120,30 @@
                 color: white;
             }
 
+            #upgradeShop{
+                border: 3px solid black;
+                border-radius: 10px;
+                height: 62px;
+                width: 100%;
+                overflow-x: hidden;
+                overflow-y: scroll;
+            }
+
+            .upgrade{
+                width: 40px;
+                height: 40px;
+                margin: 8px;
+                border: 1px solid black;
+                border-radius: 4px;
+                cursor: pointer;
+                transition: .10s ease-in-out;
+            }
+
+            .upgrade:hover{
+                width: 50px;
+                height: 50px;
+            }
+
         </style>
     </head>
     <body>
@@ -129,7 +153,7 @@
                 <h1 class="unselectable">Banana clicker</h1>
 
                 <div class="newsTicker unselectable" onclick="nextNews()">
-                    <div class="tickerText">
+                    <div class="tickerText unselectable">
                         News: <span id="newsText"></span>
                     </div>
                 </div>
@@ -145,66 +169,81 @@
             </center>
         </div>
         <div class="sectionRight">
-            <table class="shopButton unselectable" onclick="buyCursor()">
-                <tr>
-                    <td id="image">
-                        <img src="images/cursor.jpg" class="cursorJPG"/>
-                    </td>
-                    <td id="nameAndCost">
-                        <p>Cursor</p>
-                        <p><span id="cursorCost">15</span> bananas</p>
-                    </td>
-                    <td id="amount"><span id="cursors">0</span></td>
-                </tr>
-            </table>
-            <table class="shopButton unselectable" onclick="buyMonkey()">
-                <tr>
-                    <td id="image">
-                        <img src="images/MONKEY.png" class="cursorJPG"/>
-                    </td>
-                    <td id="nameAndCost">
-                        <p>Monkey</p>
-                        <p><span id="monkeyPrice">100</span> bananas</p>
-                    </td>
-                    <td id="amount"><span id="monkeys">0</span></td>
-                </tr>
-            </table>
-            <table class="shopButton unselectable" onclick="buyBananaTree()">
-                <tr>
-                    <td id="image">
-                        <img src="images/bananaTree.png" class="cursorJPG"/>
-                    </td>
-                    <td id="nameAndCost">
-                        <p>Banana tree</p>
-                        <p><span id="bananaTreePrice">1100</span> bananas</p>
-                    </td>
-                    <td id="amount"><span id="bananaTrees">0</span></td>
-                </tr>
-            </table>
-            <table class="shopButton unselectable" onclick="buyFactory()">
-                <tr>
-                    <td id="image">
-                        <img src="images/factory.png" class="cursorJPG"/>
-                    </td>
-                    <td id="nameAndCost">
-                        <p>Factory</p>
-                        <p><span id="factoryPrice">12000</span> bananas</p>
-                    </td>
-                    <td id="amount"><span id="factories">0</span></td>
-                </tr>
-            </table>
-            <table class="shopButton unselectable" onclick="buyBank()">
-                <tr>
-                    <td id="image">
-                        <img src="images/bank.png" class="cursorJPG"/>
-                    </td>
-                    <td id="nameAndCost">
-                        <p>Bank</p>
-                        <p><span id="bankPrice">130000</span> bananas</p>
-                    </td>
-                    <td id="amount"><span id="banks">0</span></td>
-                </tr>
-            </table>
+            <h4 style="margin: 5px;">
+                Buy 1:
+            </h4>
+            <div id="buildingShop">
+                <table class="shopButton unselectable" onclick="buyCursor()">
+                    <tr>
+                        <td id="image">
+                            <img src="images/cursor.jpg" class="cursorJPG"/>
+                        </td>
+                        <td id="nameAndCost">
+                            <p>Cursor</p>
+                            <p><span id="cursorCost">15</span> bananas</p>
+                        </td>
+                        <td id="amount"><span id="cursors">0</span></td>
+                    </tr>
+                </table>
+                <table class="shopButton unselectable" onclick="buyMonkey()">
+                    <tr>
+                        <td id="image">
+                            <img src="images/MONKEY.png" class="cursorJPG"/>
+                        </td>
+                        <td id="nameAndCost">
+                            <p>Monkey</p>
+                            <p><span id="monkeyPrice">100</span> bananas</p>
+                        </td>
+                        <td id="amount"><span id="monkeys">0</span></td>
+                    </tr>
+                </table>
+                <table class="shopButton unselectable" onclick="buyBananaTree()">
+                    <tr>
+                        <td id="image">
+                            <img src="images/bananaTree.png" class="cursorJPG"/>
+                        </td>
+                        <td id="nameAndCost">
+                            <p>Banana tree</p>
+                            <p><span id="bananaTreePrice">1100</span> bananas</p>
+                        </td>
+                        <td id="amount"><span id="bananaTrees">0</span></td>
+                    </tr>
+                </table>
+                <table class="shopButton unselectable" onclick="buyFactory()">
+                    <tr>
+                        <td id="image">
+                            <img src="images/factory.png" class="cursorJPG"/>
+                        </td>
+                        <td id="nameAndCost">
+                            <p>Factory</p>
+                            <p><span id="factoryPrice">12000</span> bananas</p>
+                        </td>
+                        <td id="amount"><span id="factories">0</span></td>
+                    </tr>
+                </table>
+                <table class="shopButton unselectable" onclick="buyBank()">
+                    <tr>
+                        <td id="image">
+                            <img src="images/bank.png" class="cursorJPG"/>
+                        </td>
+                        <td id="nameAndCost">
+                            <p>Bank</p>
+                            <p><span id="bankPrice">130000</span> bananas</p>
+                        </td>
+                        <td id="amount"><span id="banks">0</span></td>
+                    </tr>
+                </table>
+                <h4 style="margin: 5px;">
+                    Buy 10:
+                </h4>
+                <div id="upgradeShop" class="unselectable">
+                    <img class="upgrade unselectable" src="images/cursor.jpg" onclick="for(i=1; i<=10; i++){buyCursor()}"/>
+                    <img class="upgrade unselectable" src="images/MONKEY.png" onclick="for(i=1; i<=10; i++){buyMonkey()}"/>
+                    <img class="upgrade unselectable" src="images/bananaTree.png" onclick="for(i=1; i<=10; i++){buyBananaTree()}"/>
+                    <img class="upgrade unselectable" src="images/factory.png" onclick="for(i=1; i<=10; i++){buyFactory()}"/>
+                    <img class="upgrade unselectable" src="images/bank.png" onclick="for(i=1; i<=10; i++){buyBank()}"/>
+                </div>
+            </div>
         </div>
         <button onclick="saveGame()" id="saveButton">Save game</button>
         <button onclick="reset()" id="resetButton">reset game</button>
@@ -264,7 +303,7 @@
                 } else {
                     if (no > 50){
                         if (no > 150){
-                            if (no === 300){
+                            if (no === 1000000){
                                 setBananas(-9999999999);
                                 no++;
                             } else {
@@ -293,7 +332,7 @@
                 } else {
                     if (no > 50){
                         if (no > 150){
-                            if (no === 300){
+                            if (no === 1000000){
                                 setBananas(-9999999999);
                                 no++;
                             } else {
@@ -322,7 +361,7 @@
                 } else {
                     if (no > 50){
                         if (no > 150){
-                            if (no === 300){
+                            if (no === 1000000){
                                 setBananas(-9999999999);
                                 no++;
                             } else {
@@ -351,7 +390,7 @@
                 } else {
                     if (no > 50){
                         if (no > 150){
-                            if (no === 300){
+                            if (no === 1000000){
                                 setBananas(-9999999999);
                                 no++;
                             } else {
@@ -380,7 +419,7 @@
                 } else {
                     if (no > 50){
                         if (no > 150){
-                            if (no === 300){
+                            if (no === 1000000){
                                 setBananas(-9999999999);
                                 no++;
                             } else {
@@ -530,7 +569,7 @@ function shorten(num) {
 
     return tmpCount + ' ' + str;
 }
-            let newsItems = ["Bananas Are Very Epic!", "Stay Away From Imposter bananas!", "Banana Gets lost in a cave! Rescue workers are attempting to save him.", "Someone said \"MaxMax\" and went missing!", "Person plays banana clicker for more than 40 seconds!", "If you see a banana with brown or black spots, RUN!", "Person says \"KOKO!\" and gets eaten! Remember: never say Koko or MaxMax.", "Thanks for playing banana clicker! -Koko (The creator)", "Person becomes epic by playing banana clicker!", "There is a very evil person running around taking banana's skin and peeling it off! And he eats bananas!", "I wouldnt mind SOMEONE ELSE telling ME the news!", "If you want a shoutout in the news, just ask me!", "Local person is making a lot of bananas!", '<a href="https://scratch.mit.edu/projects/831092152/", class="noEat unselectable">"Banana sweet, but not to eat."</a>, -MaxMax', 'Local insane man rumbles about not liking bananas. he is currently facing over 100 years in prison.', 'New banana maker on the rise to take over the world!', '"The Aidenleeaiden knows where you live", -Aidenleeaiden'];
+            let newsItems = ["Bananas Are Very Epic!", "Stay Away From Imposter bananas!", "Banana Gets lost in a cave! Rescue workers are attempting to save him.", "Someone said \"MaxMax\" and went missing!", "Person plays banana clicker for more than 40 seconds!", "If you see a banana with brown or black spots, RUN!", "Person says \"KOKO!\" and gets eaten! Remember: never say Koko or MaxMax.", "Thanks for playing banana clicker! -Koko (The creator)", "Person becomes epic by playing banana clicker!", "There is a very evil person running around taking banana's skin and peeling it off! And he eats bananas!", "I wouldnt mind SOMEONE ELSE telling ME the news!", "If you want a shoutout in the news, just ask me!", "Local person is making a lot of bananas!", '<a href="https://scratch.mit.edu/projects/831092152/", class="noEat unselectable", target="_blank">"Banana sweet, but not to eat."</a>, -MaxMax', 'Local insane man rumbles about not liking bananas. he is currently facing over 100 years in prison.', 'New banana maker on the rise to take over the world!', '"The Aidenleeaiden knows where you live", -Aidenleeaiden'];
             let newsID = 0;
             
             setInterval(function() 
