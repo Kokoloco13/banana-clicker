@@ -308,6 +308,8 @@
             
             function bananaClicked(){
                 score += Math.round(clickingPower);
+                let bananaClickSound = new Audio('sounds/ohbanana.wav');
+                bananaClickSound.play();
                 update();
             }
 
