@@ -9,6 +9,7 @@
         <style>
             *{
                 font-family: sans serif, monospace, comic sans ms;
+                user-select: none;
             }
 
             h1{
@@ -85,10 +86,6 @@
                 cursor: pointer;
             }
 
-            .unselectable{
-                user-select: none;
-            }
-
             #saveButton{
                 position: absolute;
                 bottom: 2%;
@@ -160,32 +157,32 @@
         
         <div class="sectionLeft">
             <center>
-                <h1 class="unselectable">Banana clicker</h1>
+                <h1 >Banana clicker</h1>
 
                 <p id="displayName"><span id="name">Noisy Pineapples</span>'s Bananas</p>
 
-                <div class="newsTicker unselectable" onclick="nextNews()">
-                    <div class="tickerText unselectable">
+                <div class="newsTicker " onclick="nextNews()">
+                    <div class="tickerText ">
                         News: <span id="newsText"></span>
                     </div>
                 </div>
-                <div class="scoreContainer unselectable">
+                <div class="scoreContainer ">
                     <span id="score">0</span> bananas<br />
                     <span id="bps">0</span> bananas per second<br />
                     <span id="clickingPower">1</span> bananas per click
                 </div>
                 <br />
-                <div class="clickerContainer unselectable">
-                    <img src="images/banananana.png" onclick="bananaClicked()" id="banana" class="unselectable"/>
+                <div class="clickerContainer ">
+                    <img src="images/banananana.png" onclick="bananaClicked()" id="banana" />
                 </div>
             </center>
         </div>
         <div class="sectionRight">
-            <h4 style="margin: 5px;" class="unselectable">
+            <h4 style="margin: 5px;" >
                 Buy 1:
             </h4>
             <div id="buildingShop">
-                <table class="shopButton unselectable" onclick="buyCursor()">
+                <table class="shopButton " onclick="buyCursor()">
                     <tr>
                         <td id="image">
                             <img src="images/cursor.jpg" class="cursorJPG"/>
@@ -197,7 +194,7 @@
                         <td id="amount"><span id="cursors">0</span></td>
                     </tr>
                 </table>
-                <table class="shopButton unselectable" onclick="buyMonkey()">
+                <table class="shopButton " onclick="buyMonkey()">
                     <tr>
                         <td id="image">
                             <img src="images/MONKEY.png" class="cursorJPG"/>
@@ -209,7 +206,7 @@
                         <td id="amount"><span id="monkeys">0</span></td>
                     </tr>
                 </table>
-                <table class="shopButton unselectable" onclick="buyBananaTree()">
+                <table class="shopButton " onclick="buyBananaTree()">
                     <tr>
                         <td id="image">
                             <img src="images/bananaTree.png" class="cursorJPG"/>
@@ -221,7 +218,7 @@
                         <td id="amount"><span id="bananaTrees">0</span></td>
                     </tr>
                 </table>
-                <table class="shopButton unselectable" onclick="buyFactory()">
+                <table class="shopButton " onclick="buyFactory()">
                     <tr>
                         <td id="image">
                             <img src="images/factory.png" class="cursorJPG"/>
@@ -233,7 +230,7 @@
                         <td id="amount"><span id="factories">0</span></td>
                     </tr>
                 </table>
-                <table class="shopButton unselectable" onclick="buyBank()">
+                <table class="shopButton " onclick="buyBank()">
                     <tr>
                         <td id="image">
                             <img src="images/bank.png" class="cursorJPG"/>
@@ -245,15 +242,15 @@
                         <td id="amount"><span id="banks">0</span></td>
                     </tr>
                 </table>
-                <h4 style="margin: 5px;" class="unselectable">
+                <h4 style="margin: 5px;" >
                     Buy 10:
                 </h4>
-                <div id="upgradeShop" class="unselectable">
-                    <img class="upgrade unselectable" src="images/cursor.jpg" onclick="for(i=1; i<=10; i++){buyCursor()}"/>
-                    <img class="upgrade unselectable" src="images/MONKEY.png" onclick="for(i=1; i<=10; i++){buyMonkey()}"/>
-                    <img class="upgrade unselectable" src="images/bananaTree.png" onclick="for(i=1; i<=10; i++){buyBananaTree()}"/>
-                    <img class="upgrade unselectable" src="images/factory.png" onclick="for(i=1; i<=10; i++){buyFactory()}"/>
-                    <img class="upgrade unselectable" src="images/bank.png" onclick="for(i=1; i<=10; i++){buyBank()}"/>
+                <div id="upgradeShop" >
+                    <img class="upgrade " src="images/cursor.jpg" onclick="for(i=1; i<=10; i++){buyCursor()}"/>
+                    <img class="upgrade " src="images/MONKEY.png" onclick="for(i=1; i<=10; i++){buyMonkey()}"/>
+                    <img class="upgrade " src="images/bananaTree.png" onclick="for(i=1; i<=10; i++){buyBananaTree()}"/>
+                    <img class="upgrade " src="images/factory.png" onclick="for(i=1; i<=10; i++){buyFactory()}"/>
+                    <img class="upgrade " src="images/bank.png" onclick="for(i=1; i<=10; i++){buyBank()}"/>
                 </div>
             </div>
         </div>
@@ -625,7 +622,7 @@ function shorten(num) {
 
     return tmpCount + ' ' + str;
 }
-            let newsItems = ["Bananas Are Very Epic!", "Stay Away From Imposter bananas!", "Banana Gets lost in a cave! Rescue workers are attempting to save him.", "Someone said \"MaxMax\" and went missing!", "Person plays banana clicker for more than 40 seconds!", "If you see a banana with brown or black spots, RUN!", "Person says \"KOKO!\" and gets eaten! Remember: never say Koko or MaxMax.", "Thanks for playing banana clicker! -Koko (The creator)", "Person becomes epic by playing banana clicker!", "There is a very evil person running around taking banana's skin and peeling it off! And he eats bananas!", "I wouldnt mind SOMEONE ELSE telling ME the news!", "If you want a shoutout in the news, just ask me!", "Local person is making a lot of bananas!", '<a href="https://scratch.mit.edu/projects/831092152/", class="noEat unselectable", target="_blank">"Banana sweet, but not to eat."</a>, -MaxMax', 'Local insane man rumbles about not liking bananas. he is currently facing over 100 years in prison.', 'New banana maker on the rise to take over the world!', '"The Aidenleeaiden knows where you live", -Aidenleeaiden'];
+            let newsItems = ["Bananas Are Very Epic!", "Stay Away From Imposter bananas!", "Banana Gets lost in a cave! Rescue workers are attempting to save him.", "Someone said \"MaxMax\" and went missing!", "Person plays banana clicker for more than 40 seconds!", "If you see a banana with brown or black spots, RUN!", "Person says \"KOKO!\" and gets eaten! Remember: never say Koko or MaxMax.", "Thanks for playing banana clicker! -Koko (The creator)", "Person becomes epic by playing banana clicker!", "There is a very evil person running around taking banana's skin and peeling it off! And he eats bananas!", "I wouldnt mind SOMEONE ELSE telling ME the news!", "If you want a shoutout in the news, just ask me!", "Local person is making a lot of bananas!", '<a href="https://scratch.mit.edu/projects/831092152/", class="noEat ", target="_blank">"Banana sweet, but not to eat."</a>, -MaxMax', 'Local insane man rumbles about not liking bananas. he is currently facing over 100 years in prison.', 'New banana maker on the rise to take over the world!', '"The Aidenleeaiden knows where you live", -Aidenleeaiden'];
             let newsID = 0;
             
             setInterval(function() 
